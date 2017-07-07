@@ -278,6 +278,7 @@
         events: [],
 
         // callback function
+        onBeforeRenderDay: null,
         onSelect: null,
         onOpen: null,
         onClose: null,
@@ -334,6 +335,9 @@
         }
         if (opts.isEndRange) {
             arr.push('is-endrange');
+        }
+        if (typeof opts.beforeRenderDay === 'function') {
+            arr.push(opts.beforeRenderDay(opts));
         }
         return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '">' +
                  '<button class="pika-button pika-day" type="button" ' +
@@ -1144,6 +1148,7 @@
                         isStartRange: isStartRange,
                         isEndRange: isEndRange,
                         isInRange: isInRange,
+                        beforeRenderDay: opts.beforeRenderDay,
                         showDaysInNextAndPreviousMonths: opts.showDaysInNextAndPreviousMonths,
                         enableSelectionDaysInNextAndPreviousMonths: opts.enableSelectionDaysInNextAndPreviousMonths
                     };
